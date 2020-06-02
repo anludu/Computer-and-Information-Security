@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Nombre de la Applicación</th>
+            <th scope="col">Password</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if applications %}
+
+            {% for application in applications %}
+
+                <tr>
+                    <td>{{ application.name }}</td>
+                    <td>{{ application.secret_password }}</td>
+                </tr>
+            {% endfor %}
+
+        {% else %}
+            <h2 id="msg">No hay applicaciones registradas</h2>
+        {% endif %}
+</div>
+</body>
+</html>

@@ -15,7 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from two_factor.urls import urlpatterns as tf_urls
+from django.conf.urls import url
+from django.conf.urls import include
+from two_factor.gateways.twilio.urls import urlpatterns as tf_twilio_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    url(r'', include(tf_urls)),
+    url(r'', include(tf_twilio_urls)),
+    path('apps/', include('apps.urls')),
 ]
