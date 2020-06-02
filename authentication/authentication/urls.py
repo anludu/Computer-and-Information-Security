@@ -24,8 +24,8 @@ from django_otp.admin import OTPAdminSite
 class OTPAdmin(OTPAdminSite):
     pass
 
-
 from django.contrib import admin
+
 from django.contrib.auth.models import User
 
 from django_otp.plugins.otp_totp.models import TOTPDevice
@@ -40,4 +40,6 @@ urlpatterns = [
     url(r'^admin/', admin_site.urls),
     url(r'^dadmin/', admin.site.urls),
     path(r'', include(tf)),
+    path('apps/', include('apps.urls')),
+
 ]

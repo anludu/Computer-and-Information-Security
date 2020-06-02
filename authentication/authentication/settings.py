@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django_otp.plugins.otp_static',
     'django_otp.plugins.otp_totp',
     'two_factor',
+    'otp_yubikey',
+    'apps'
+
 ]
 
 MIDDLEWARE = [
@@ -51,6 +54,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django_otp.middleware.OTPMiddleware',
+    # Always include for two-factor auth
+    'django_otp.middleware.OTPMiddleware',
+    # Include for twilio gateway
+    'two_factor.middleware.threadlocals.ThreadLocals',
+
 ]
 
 ROOT_URLCONF = 'authentication.urls'
@@ -73,6 +81,29 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'authentication.wsgi.application'
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'two_factor': {
+            'handlers': ['console'],
+            'level': 'INFO',
+        }
+    }
+}
+
+LOGIN_URL = 'two_factor:login'
+
+# this one is optional
+LOGIN_REDIRECT_URL = 'two_factor:profile'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
