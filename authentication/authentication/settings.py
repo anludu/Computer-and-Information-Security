@@ -82,6 +82,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'authentication.wsgi.application'
 
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -149,3 +150,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+LOGIN_URL = 'two_factor:login'
+
+# this one is optional
+LOGIN_REDIRECT_URL = 'two_factor:profile'
