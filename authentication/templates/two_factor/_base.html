@@ -1,0 +1,7 @@
+{% block content %}
+ {% csrf_token %}
+    {{ form.as_p }}
+    {% endblock %}
+  {% if user.is_authenticated %}
+    <button><a href="{% url 'apps:view_application'%}">Passwords</a></button>
+ {% endif %}
